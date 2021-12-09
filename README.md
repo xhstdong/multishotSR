@@ -11,4 +11,6 @@ The input images should be numbered from 0.raw to 15.raw. Additional characters 
 
 Some test images can be found here: https://drive.google.com/drive/folders/1sa6bMHf8rWKW50FiqliDVW3IchvCdZMB?usp=sharing
 
+Superresolution is achieved by taking the mean/median of all upsampled images. This is a simple yet effective way of achieving improvement.
+
 Helper code include implementations for getting better result by combining 1/3 pixel (36 total shots) and 1/4 pixel (64 total shots) shifted images 
