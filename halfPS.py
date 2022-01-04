@@ -136,6 +136,10 @@ def produce_ps3_image(input_images):
     final_image_array = np.mean(up_sampled, 0).astype(np.uint16)
     ref_img = up_sampled[0]
     
+    print('applying unsharp mask')
+    final_image_array=unsharp_mask(final_image_array, amount=1)
+    ref_img=unsharp_mask(ref_img, amount=1)
+    
     return final_image_array, ref_img
 
 
@@ -174,6 +178,10 @@ def produce_ps4_image(input_images):
     #final_image_array = np.median(up_sampled, 0).astype(np.uint16)
 
     ref_img = up_sampled[0]
+    
+    print('applying unsharp mask')
+    final_image_array=unsharp_mask(final_image_array, amount=1)
+    ref_img=unsharp_mask(ref_img, amount=1)
     
     return final_image_array, ref_img
 

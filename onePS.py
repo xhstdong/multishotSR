@@ -33,10 +33,11 @@ def produce_ps1_image(image_files, folder_name):
         f=os.path.join(folder_name,img)
     
         npimg = np.fromfile(f, dtype=np.uint16)
-        bayr.append( npimg.reshape((3024, 4096))) #this will have to be changed
+        bayr.append( npimg.reshape((3024, 4096))) #the user may need to change file size
     
     
-    cm.append(np.tile(np.array([[3, 2],[0, 1]]), [int(3024/2),int(4096/2)]))
+    cm.append(np.tile(np.array([[3, 2],[0, 1]]), [int(3024/2),int(4096/2)])) #the user may need to change file size
+    # the user may also need to change colormap grid pattern depending on the Bayer grid used
     
     r=[]
     g1=[]
@@ -101,6 +102,8 @@ def produce_ps1_image(image_files, folder_name):
     img0 = gc(img0, 1.4)
     
     # Stretching brightness to cover 16 bit per channel range
+    # note our images are 10bit, but left-shifted by 4, so this ends up working well
+    #even if it's not technically correct
     print('Stretching brightness to 16 bit per channel range')
     img*=4
     img =np.clip(img,0,2**16-1)
@@ -115,8 +118,8 @@ def produce_ps1_image(image_files, folder_name):
     
     #Write image to 16-bit TIFF file
     print('Writing the PSMS file to ',f.replace('.raw','_4shot.png'))
-    cv2.imwrite(f.replace('.raw','_4shot.png'),img_sharp)
-    cv2.imwrite(f.replace('.raw','_original.png'),img0_sharp)
+    #cv2.imwrite(f.replace('.raw','_4shot.png'),img_sharp)
+    #cv2.imwrite(f.replace('.raw','_original.png'),img0_sharp)
     cv2.imwrite(f.replace('.raw','_4shot.tiff'),img_sharp)
     cv2.imwrite(f.replace('.raw','_original.tiff'),img0_sharp)    
     
